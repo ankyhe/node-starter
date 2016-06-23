@@ -1,0 +1,13 @@
+const HTTP_VERB_CONSTANTS = {
+  GET: 'GET',
+  POST: 'POST',
+  PUT: 'PUT',
+  DELETE: 'DELETE',
+  HEAD: 'HEAD',
+  PATCH: 'PATCH',
+  OPTIONS: 'OPTIONS',
+  TRACE: 'TRACE',
+  CONNECT: 'CONNECT',
+};
+
+export {HTTP_VERB_CONSTANTS as default} ;

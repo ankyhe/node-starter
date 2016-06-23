@@ -1,0 +1,14 @@
+/*
+ * It is not a good idea to use a different .eslintrc for test & src
+ * So please carefully revise this file.
+ * The common rule is: please don't change this file, except you have strong judgement.
+ */
+{
+  "rules": {
+    /*
+     * We decide to use NODE_PATH=. during running unit testing for import from root path.
+     * so we ignore this rules just for test files
+     */
+    "import/no-unresolved": ["off"]
+  }
+}

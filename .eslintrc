@@ -1,0 +1,41 @@
+{
+  "extends": "airbnb-base",
+
+  "parserOptions": {
+    "ecmaVersion": 6,
+		"ecmaFeatures": {
+			"jsx": false
+		}
+  },
+
+  "env": {
+    "node": true,
+    "mocha": true
+  },
+
+  "globals": {
+  },
+
+	"rules": {
+    "no-mixed-spaces-and-tabs": ["error", "smart-tabs"],
+    "object-curly-spacing": ["error", "never"], /* this breaks airbnb */
+	  "no-var": ["error"],
+	  "func-names": ["error"],
+	  "padded-blocks": ["warn"],
+	  "comma-dangle": ["off", "always"],
+	  "no-underscore-dangle": ["error", { "allowAfterThis": true, "allow": ["_headers", "_s"] }],
+	  "no-multi-spaces": ["warn", {"exceptions": {"VariableDeclarator": true}}],
+	  "prefer-arrow-callback": ["off"],
+	  "no-param-reassign": ["warn"],
+	  "eqeqeq": ["error"],
+	  "radix": ["warn", "as-needed"],
+	  "global-require": ["off"],
+	  "no-nested-ternary": ["warn"],
+	  "guard-for-in": ["warn"],
+	  "dot-notation": ["warn"],
+	  "prefer-template": ["warn"],
+	  "newline-per-chained-call": ["off"],
+		"import/no-unresolved": ["warn"],
+    "no-unused-vars": ["error", { "varsIgnorePattern": ".*AF" }]
+  }
+}
