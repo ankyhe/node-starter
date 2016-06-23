@@ -1,6 +1,6 @@
 class HelloController {
-  getHello(req, reply) {
-    reply({data: `hello for ${req.params.name}!`});
+  getHello(request, reply) {
+    reply({data: `hello for ${request.params.name}!`});
   }
 }
 

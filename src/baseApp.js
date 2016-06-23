@@ -7,16 +7,17 @@ import createLogger from './utils/createLogger';
 import routers from './routers';
 
 const Package = require('../package.json');
+
 const log = createLogger();
 
 class BaseApp {
-
   constructor(host, port, name) {
     this.name_ = name | Package.name;
     this.server_ = this.createServer_(host, port);
   }
 
   start() {
+    this.setRequestResponseLog_();
     this.registerPluginsInServer_();
     this.addRoutes_();
     this.registerShutdownHandler_();
@@ -27,6 +28,26 @@ class BaseApp {
     const ret = new Hapi.Server();
     ret.connection({host, port});
     return ret;
+  }
+
+  setRequestResponseLog_() {
+    let requestEventAF;
+    this.server_.on('request-internal', requestEventAF = (request, event, tags) => {
+      const path = request.url.path;
+      if (tags.received && !path.startsWith('/swagger')) {
+        log.debug({category: 'access'}, '%s:%s --> %s',
+          request.info.remoteAddress, request.method.toUpperCase(), path);
+      }
+    });
+    let responseEventAF;
+    this.server_.on('response', responseEventAF = (request) => {
+      const path = request.url.path;
+      if (!path.startsWith('/swagger')) {
+        log.debug({category: 'access'}, '%s:%s <-- %s [%s]',
+          request.info.remoteAddress, request.method.toUpperCase(), path,
+          request.response.statusCode);
+      }
+    });
   }
 
   registerPluginsInServer_() {
@@ -95,7 +116,7 @@ class BaseApp {
         throw err;
       }
       /* eslint-disable no-console */
-      console.log('Server is started.  You could access %s/api/doc for documentation.',
+      console.log('>>> Server is started.  You could access %s/api/doc for documentation.',
         this.server_.info.uri);
       /* eslint-enable no-console */
 

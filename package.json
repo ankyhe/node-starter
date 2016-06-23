@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "./node_modules/.bin/babel-node -- ./src/app.js",
-    "start:watch": "nodemon --exec ./node_modules/.bin/babel-node -- ./src/app.js",
+    "start:log": "./node_modules/.bin/babel-node -- ./src/app.js | ./node_modules/.bin/bunyan",
+    "start:watch": "nodemon --exec ./node_modules/.bin/babel-node -- ./src/app.js | ./node_modules/.bin/bunyan",
     "lint": "NODE_PATH=. ./node_modules/.bin/esw src test",
     "lint:watch": "NODE_PATH=. ./node_modules/.bin/esw -w src test",
     "test": "NODE_PATH=. ./node_modules/.bin/mocha -R spec --compilers js:babel-register --recursive test",
@@ -47,6 +48,18 @@
     "sinon-chai": "^2.8.0"
   },
   "customInformation": {
-    "apiVersion": "0.1"
+    "apiVersion": "0.1",
+    "development": {
+      "log": {
+        "level": "debug",
+        "toConsole": true
+      }
+    },
+    "default": {
+      "log": {
+        "level": "info",
+        "toConsole": false
+      }
+    }
   }
 }
